@@ -23,7 +23,10 @@ Como rodar o projeto?
   instale todas as dependências com o comando “yarn” ou “npm install”
 
 2 Passo:
-  inicie o projeto com o comando "yarn dev" ou "npm run dev"
+	crie um arquivo chamado .env na raiz do projeto e preencha as variáveis solicitadas
 
 3 Passo:
+  inicie o projeto com o comando "yarn dev" ou "npm run dev"
+
+4 Passo:
   Acesse a url “http://localhost:4000”

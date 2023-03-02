@@ -4,14 +4,14 @@ import Express, { Request, Response } from 'express'
 
 require('dotenv').config()
 
-const port = 4000
+const port = process.env.PORT || 4000
 const app = Express()
 
 const analyticsDataClient = new BetaAnalyticsDataClient()
 
 const propertyId = process.env.PROPERTY_ID || 'YOUR-GA4-PROPERTY-ID'
-const credential_path = `${__dirname}/credential.json`;
-process.env.GOOGLE_APPLICATION_CREDENTIALS = credential_path;
+const credential_path = `${__dirname}/credential.json`
+process.env.GOOGLE_APPLICATION_CREDENTIALS = credential_path
 
 app.use(Express.json())
 app.use(Express.urlencoded({ extended: true }))
@@ -43,12 +43,12 @@ const runReport = async () => {
         name: 'activeUsers',
       },
     ],
-  });
+  })
 
   console.log('Report result:');
   response?.rows?.forEach((row: any) => {
-    console.log(row.dimensionValues[0], row.metricValues[0]);
-  });
+    console.log(row.dimensionValues[0], row.metricValues[0])
+  })
 }
 
 app.get('/', (req: Request, res: Response) => {
