@@ -7,7 +7,7 @@ Este repositório tem por objetivo mostrar como começar a usar a API de dados d
 	Ativar a API de dados do google analytics (https://console.cloud.google.com/apis/api/analyticsdata.googleapis.com/).
 
 3 Passo:
-	Criar uma cConta de serviço (https://console.cloud.google.com/iam-admin/serviceaccounts) e baixar o arquivo de credenciais.json.
+	Criar uma conta de serviço (https://console.cloud.google.com/iam-admin/serviceaccounts) e baixar o arquivo de credenciais.json.
 
 4 Passo: 
 	Deve-se cadastrar a conta de serviço (criada no passo 3) na plataforma do Google Analytics (https://analytics.google.com/analytics/web/), Acesse a aba de “Administrador”, depois a aba de “Gerenciamento de acesso à conta”, depois a aba de “Adicionar permissões de acesso a novos usuários” (o símbolo de + na cor azul), depois selecione "Adicionar usuário", insira o email da conta de serviço no campo “Endereços de e-mail” e selecione o papel de “Leitor”. Caso você não saiba qual o email da conta de serviço abra o arquivo .json com um editor de texto e localize o campo “client_email”.
