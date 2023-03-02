@@ -1,7 +1,6 @@
 import { BetaAnalyticsDataClient } from "@google-analytics/data"
 import moment from "moment"
 import Express, { Request, Response } from 'express'
-import expressSession from 'express-session'
 
 require('dotenv').config()
 
@@ -16,7 +15,6 @@ process.env.GOOGLE_APPLICATION_CREDENTIALS = credential_path;
 
 app.use(Express.json())
 app.use(Express.urlencoded({ extended: true }))
-app.use(expressSession({ secret: 'as!883@bnr$', resave: true, saveUninitialized: true }))
 
 const runReport = async () => {
   const now = moment().format('YYYY-MM-DD')
