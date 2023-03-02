@@ -1,23 +1,22 @@
-import { BetaAnalyticsDataClient } from "@google-analytics/data";
-import moment from "moment";
-import Express, { Request, Response } from 'express';
-import passport from "passport";
+import { BetaAnalyticsDataClient } from "@google-analytics/data"
+import moment from "moment"
+import Express, { Request, Response } from 'express'
+import expressSession from 'express-session'
 
 require('dotenv').config()
 
 const port = 4000
 const app = Express()
 
-const analyticsDataClient = new BetaAnalyticsDataClient();
+const analyticsDataClient = new BetaAnalyticsDataClient()
 
-const propertyId = process.env.PROPERTY_ID || 'YOUR-GA4-PROPERTY-ID';
-const clientID = process.env.CLIENT_ID
-const clientSecret = process.env.CLIENT_SECRET
-const callbackURL = '/login/google/return'
-const scope = 'https://www.googleapis.com/auth/analytics.readonly';
+const propertyId = process.env.PROPERTY_ID || 'YOUR-GA4-PROPERTY-ID'
+const credential_path = `${__dirname}/credential.json`;
+process.env.GOOGLE_APPLICATION_CREDENTIALS = credential_path;
 
 app.use(Express.json())
 app.use(Express.urlencoded({ extended: true }))
+app.use(expressSession({ secret: 'as!883@bnr$', resave: true, saveUninitialized: true }))
 
 const runReport = async () => {
   const now = moment().format('YYYY-MM-DD')
@@ -37,6 +36,9 @@ const runReport = async () => {
       {
         name: 'city',
       },
+      // {
+      //   name: 'date',
+      // },
     ],
     metrics: [
       {
@@ -44,7 +46,7 @@ const runReport = async () => {
       },
     ],
   });
-
+  // criar doc e commitar
   console.log('Report result:');
   response?.rows?.forEach((row: any) => {
     console.log(row.dimensionValues[0], row.metricValues[0]);
@@ -52,38 +54,11 @@ const runReport = async () => {
 }
 
 app.get('/', (req: Request, res: Response) => {
+  runReport()
   res.status(200).json({
-    foi: 'foi'
+    message: 'Ok'
   })
 })
-
-app.get(
-  '/login/google/',
-  passport.authenticate('google', {
-    session: true,
-    scope: scope,
-    successRedirect: callbackURL,
-    
-  }),
-);
-
-app.get(
-  '/login/google/return',
-  passport.authenticate('google', {
-    failureRedirect: '/login/google/failure',
-    failureMessage: true,
-    session: true,
-  }),
-  (req: Request, res: Response) => {
-    console.log(req)
-  },
-);
-
-app.get('/login/google//failure', (req, res) => res.status(400).json({
-  message: 'Something went wrong.',
-}));
-
-// ver estategia para logar com o oauth2
 
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`)

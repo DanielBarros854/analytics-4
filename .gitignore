@@ -10,3 +10,5 @@ dist
 
 uploads/*
 !uploads/.gitkeep
+
+src/credential.json
