@@ -46,7 +46,7 @@ const runReport = async () => {
       },
     ],
   });
-  // criar doc e commitar
+
   console.log('Report result:');
   response?.rows?.forEach((row: any) => {
     console.log(row.dimensionValues[0], row.metricValues[0]);
